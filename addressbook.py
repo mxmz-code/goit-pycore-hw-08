@@ -1,3 +1,4 @@
+import json
 from datetime import datetime
 
 class AddressBook:
@@ -62,3 +63,21 @@ class AddressBook:
                 print(f"Ім'я: {name}, День народження: {birthday} (через {days} днів)")
         else:
             print("Немає днів народження в найближчі 30 днів.")
+
+# Додаємо функції для збереження та завантаження даних
+def save_data(addressbook, filename="addressbook.json"):
+    with open(filename, 'w') as f:
+        json.dump(addressbook.records, f)
+    print("Адресна книга збережена.")
+
+def load_data(filename="addressbook.json"):
+    try:
+        with open(filename, 'r') as f:
+            records = json.load(f)
+        addressbook = AddressBook()
+        addressbook.records = records
+        print("Адресна книга завантажена.")
+        return addressbook
+    except FileNotFoundError:
+        print("Файл не знайдено. Створюється нова адресна книга.")
+        return AddressBook()

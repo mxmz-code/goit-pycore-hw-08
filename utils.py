@@ -1,5 +1,6 @@
+from datetime import datetime  # Додаємо імпорт модуля datetime
+
 def print_menu():
-    
     print("\n╔════════════════════════════════════════╗")
     print("║              Адресна Книга             ║")
     print("╠════════════════════════════════════════╣")
@@ -24,7 +25,7 @@ def validate_phone(phone):
 
 def validate_birthday(birthday):
     try:
-        datetime.strptime(birthday, '%d.%m.%Y')
+        datetime.strptime(birthday, '%d.%m.%Y')  # Перевіряємо формат дати
         return True
     except ValueError:
         return False

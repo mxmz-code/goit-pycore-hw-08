@@ -1,4 +1,4 @@
-import json
+import pickle
 from datetime import datetime
 
 class AddressBook:
@@ -64,19 +64,19 @@ class AddressBook:
         else:
             print("Немає днів народження в найближчі 30 днів.")
 
-# Додаємо функції для збереження та завантаження даних
-def save_data(addressbook, filename="addressbook.json"):
-    with open(filename, 'w') as f:
-        json.dump(addressbook.records, f)
-    print("Адресна книга збережена.")
+# Функції для збереження та завантаження даних за допомогою pickle
+def save_data(addressbook, filename="addressbook.pkl"):
+    with open(filename, 'wb') as f:
+        pickle.dump(addressbook.records, f)
+    print("Адресна книга збережена у файлі addressbook.pkl.")
 
-def load_data(filename="addressbook.json"):
+def load_data(filename="addressbook.pkl"):
     try:
-        with open(filename, 'r') as f:
-            records = json.load(f)
+        with open(filename, 'rb') as f:
+            records = pickle.load(f)
         addressbook = AddressBook()
         addressbook.records = records
-        print("Адресна книга завантажена.")
+        print("Адресна книга завантажена з файлу addressbook.pkl.")
         return addressbook
     except FileNotFoundError:
         print("Файл не знайдено. Створюється нова адресна книга.")
